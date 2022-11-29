@@ -40,7 +40,9 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 
 //routes
 app.use('/', require('./routes/root'))
-app.use('/auth',require('./routes/auth'))
+// app.use('/auth',require('./routes/auth'))
+app.use('/users', require('./routes/user'))
+app.use('/notes', require('./routes/noteRoutes'))
 
 
 

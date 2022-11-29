@@ -5,10 +5,14 @@ const express = require('express')
 const router = express.Router()
 
 const Register = expressAsyncHandler(async (req,res)=>{
-    const {username,password,role} = req.body
-    if(!username || !password || !Array.isArray(role) || !removeListener.length){
-        return res.status(400).json({ message: 'All fields are required' })
+    const {username,password,roles} = req.body
+    if(!username ){
+        return res.status(400).json({ message: 'Enter the username' })}
     // Check for duplicate username
+    if(!password ){
+        return res.status(400).json({ message: 'Enter the password' })}
+    if(!roles.length ){
+        return res.status(400).json({ message: 'Enter the roles' })}
     const duplicate = await User.findOne({ username }).lean().exec()
 
     if (duplicate) {
@@ -28,7 +32,8 @@ const Register = expressAsyncHandler(async (req,res)=>{
     } else {
         res.status(400).json({ message: 'Invalid user data received' })
     }
-    }
+    
+    
 })
 const Login = expressAsyncHandler(async (req,res)=>{
     const { username, password } = req.body
